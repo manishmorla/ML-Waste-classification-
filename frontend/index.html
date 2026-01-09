@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-Powered Waste Classification System - Classify organic and non-organic waste using machine learning">
+    <title>Waste Classification AI | Organic & Non-Organic Detection</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h1>WasteAI</h1>
+                </div>
+                <p class="tagline">Machine Learning Driven Waste Classification</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-header">
+                        <h2>Upload Waste Image</h2>
+                        <p>Upload an image to classify it as organic or non-organic waste</p>
+                    </div>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10L12 5L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 5V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p class="upload-text">Drag & drop your image here</p>
+                            <p class="upload-subtext">or click to browse</p>
+                            <p class="upload-formats">Supports: JPG, PNG, GIF, BMP</p>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+
+                    <div class="preview-section" id="previewSection" style="display: none;">
+                        <div class="image-preview">
+                            <img id="previewImage" src="" alt="Preview">
+                            <button class="remove-btn" id="removeBtn" aria-label="Remove image">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" id="classifyBtn">
+                            <span>Classify Waste</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-card">
+                    <h2>Classification Result</h2>
+                    <div class="result-content">
+                        <div class="result-badge" id="resultBadge">
+                            <span class="badge-label">ORGANIC</span>
+                            <span class="badge-confidence">95%</span>
+                        </div>
+                        <div class="confidence-bars">
+                            <div class="confidence-item">
+                                <div class="confidence-label">
+                                    <span>Organic</span>
+                                    <span class="confidence-value" id="organicConfidence">0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill organic-progress" id="organicProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="confidence-item">
+                                <div class="confidence-label">
+                                    <span>Non-Organic</span>
+                                    <span class="confidence-value" id="nonOrganicConfidence">0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill nonorganic-progress" id="nonOrganicProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" id="resetBtn">Classify Another Image</button>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Analyzing image...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 WasteAI. Machine Learning Driven Waste Classification System.</p>
+        </footer>
+    </div>
+
+    <script src="js/middleware.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
